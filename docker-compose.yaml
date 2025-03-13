@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: abhi@4567##
+      POSTGRES_DB: baseDb
+    ports:
+      - "6464:5432"
+    volumes:
+      - C:\\PostgreeDockerContainer\postgres_data:/var/lib/postgresql/data # Store data in Windows folder
+    deploy:
+      resources:
+        limits:
+          memory: 1g # Limit PostgreSQL to 1GB RAM
+        reservations:
+          memory: 512m # Reserve at least 512MB RAM
+    networks:
+      rajnetwork:
+        ipv4_address: 192.168.2.213 # Static IP Address
+
+networks:
+  rajnetwork:
+    external: true # Use the custom network created earlier
